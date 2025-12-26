@@ -6,8 +6,10 @@
 
 **🌏 World's First Full-Chinese AI Multimodal RayBan Meta Assistant**
 
-[![Platform](https://img.shields.io/badge/Platform-iOS%2017.0%2B-blue.svg)](https://www.apple.com/ios/)
+[![iOS](https://img.shields.io/badge/iOS-17.0%2B-blue.svg)](https://www.apple.com/ios/)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-green.svg)](https://www.android.com/)
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9-purple.svg)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/Turbo1123/turbometa-rayban-ai)](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
 
@@ -17,13 +19,30 @@
 
 ## 📥 Download
 
-> **No App Store submission** - Self- using tools below
+> **No App Store / Google Play** - Install directly using methods below
+
+### 📱 Android (Recommended)
+
+| Version | Download | Size |
+|---------|----------|------|
+| v1.0.0 | [**TurboMeta-v1.0.0.apk**](https://github.com/Turbo1123/turbometa-rayban-ai/releases/tag/v1.0.0-android/TurboMeta-v1.0.0-debug.apk) | 77 MB |
+
+**Android Installation:**
+1. Download APK file
+2. Enable "Install from unknown sources" in Settings
+3. Open APK to install
+4. Grant permissions (Bluetooth, Microphone)
+5. Configure API Key in Settings
+
+---
+
+### 🍎 iOS
 
 | Version | Download | Size |
 |---------|----------|------|
 | v1.0.0 | [****](https://github.com/Turbo1123/turbometa-rayban-ai/releases/tag/v1.0.0/) | 6.0 MB |
 
-### Installation Methods
+**iOS Installation Methods:**
 
 | Tool | Platform | Description |
 |------|----------|-------------|
@@ -89,26 +108,36 @@ This is the world's first **fully Chinese-enabled** RayBan Meta AI assistant, br
 
 ## 🛠️ Tech Stack
 
+### iOS
 - **Platform**: iOS 17.0+
 - **Language**: Swift 5.0 + SwiftUI
 - **SDK**: Meta Wearables DAT SDK v0.3.0
-- **AI Models**:
-  - Qwen Omni-Realtime: Real-time multimodal conversations
-  - Qwen VL-Plus: Visual understanding and image analysis
 - **Architecture**: MVVM + Combine
 - **Audio**: AVAudioEngine + AVAudioPlayerNode
+
+### Android
+- **Platform**: Android 8.0+ (API 26)
+- **Language**: Kotlin 1.9 + Jetpack Compose
+- **SDK**: Meta Wearables DAT SDK v0.3.0
+- **Architecture**: MVVM + StateFlow
+- **UI**: Material 3 Design
+
+### AI Models
+- **Qwen Omni-Realtime**: Real-time multimodal conversations
+- **Qwen VL-Plus**: Visual understanding and image analysis
 
 ## 📋 Requirements
 
 ### Hardware Requirements
 - ✅ RayBan Meta Smart Glasses (Stories or latest model)
-- ✅ iPhone (iOS 17.0 or higher)
+- ✅ iPhone (iOS 17.0+) or Android phone (8.0+)
 - ✅ Stable internet connection
 
 ### Software Requirements
-- ✅ Xcode 15.0 or higher
-- ✅ Meta View App (for pairing glasses)
+- ✅ Meta View App / Meta AI App (for pairing glasses)
 - ✅ Alibaba Cloud account (for API access)
+- ✅ Xcode 15.0+ (iOS development)
+- ✅ Android Studio (Android development)
 
 ### API Requirements
 You need to apply for the following Alibaba Cloud APIs:
@@ -317,6 +346,7 @@ Customize AI response style in `OmniRealtimeService.swift`:
 - [x] Bilingual Chinese/English support
 - [x] Conversation history saving
 - [x] One-tap hide conversations
+- [x] **Android version released** 🎉
 
 ### 🚧 In Progress
 - [ ] Improve multilingual support
@@ -434,6 +464,18 @@ This project is based on Meta DAT SDK sample code and follows the original proje
 - 🐛 Report bugs or suggest features
 - 🔀 Fork and contribute code
 - 📢 Share with others
+
+## ☕ Buy Me a Coffee
+
+如果这个项目对你有帮助，欢迎请我喝杯咖啡！
+
+If this project helps you, consider buying me a coffee!
+
+<div align="center">
+<img src="./微信图片_20251226235019_69_908.png" width="200" alt="WeChat Pay"/>
+
+**WeChat Pay / 微信支付**
+</div>
 
 ---
 
