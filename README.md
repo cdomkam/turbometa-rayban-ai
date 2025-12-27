@@ -29,7 +29,7 @@
   <tr>
     <td><img src="./screenshots/首页.jpg" width="180"/></td>
     <td><img src="./screenshots/对话记录.jpg" width="180"/></td>
-    <td><img src="./screenshots/拍摄页面.jpg" width="180"/></td>
+    <td><img src="./screenshots/camera.jpg" width="180"/></td>
     <td><img src="./screenshots/设置页面.jpg" width="180"/></td>
   </tr>
 </table>
