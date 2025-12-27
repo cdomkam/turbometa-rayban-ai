@@ -48,12 +48,13 @@
 
 Before using TurboMeta, you **MUST** enable developer mode in Meta AI App:
 
-1. **Update Meta AI App to version 20+** (required for DAT SDK support)
-2. Open **Meta AI App** on your phone
-3. Go to **Settings** → **App Info**
-4. Find **Version Number**
-5. **Tap the version number 5 times rapidly**
-6. You'll see "Developer mode enabled" message
+1. **Update RayBan Meta glasses firmware to version 20+** (required for DAT SDK)
+2. **Update Meta AI App to the latest version**
+3. Open **Meta AI App** on your phone
+4. Go to **Settings** → **App Info**
+5. Find **Version Number**
+6. **Tap the version number 5 times rapidly**
+7. You'll see "Developer mode enabled" message
 
 > Without developer mode, the app will show an error when redirecting to Meta AI App!
 
