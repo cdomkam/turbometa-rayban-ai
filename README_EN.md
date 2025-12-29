@@ -113,6 +113,35 @@ Before using TurboMeta, you **MUST** enable developer mode in Meta AI App:
 
 **Step 5**: Open TurboMeta and configure your Alibaba Cloud API Key in Settings 👉 [See Configuration Guide](#api-key-config)
 
+---
+
+<details>
+<summary>🔋 <b>Ray-Ban Meta Battery Upgrade Service</b> (Click to expand)</summary>
+
+<br/>
+
+> 💡 **Upgrade Gen1 to Gen2 Battery, Double Your Battery Life!**
+
+Replace Ray-Ban Meta Gen1 battery with Gen2 high-capacity battery, 2x longer battery life.
+
+<table>
+  <tr>
+    <td><img src="./ad/电池更换计划.jpg" width="200"/></td>
+    <td><img src="./ad/更换后的图片.jpg" width="200"/></td>
+  </tr>
+</table>
+
+| Item | Price |
+|------|-------|
+| Original Price | ~~¥299~~ |
+| **Turbo Referral Price** | **¥249** |
+
+📱 **Contact**: WeChat ``, mention "Turbo Referral" for discount
+
+</details>
+
+---
+
 ## 📖 Introduction
 
 TurboMeta is a full-featured multimodal AI assistant built exclusively for RayBan Meta smart glasses, powered by Alibaba Cloud's Qwen multimodal AI models:
