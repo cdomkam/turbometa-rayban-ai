@@ -115,30 +115,35 @@ Before using TurboMeta, you **MUST** enable developer mode in Meta AI App:
 
 ---
 
-<details>
-<summary>🔋 <b>Ray-Ban Meta Battery Upgrade Service</b> (Click to expand)</summary>
+### 🔋 Ray-Ban Meta Battery Upgrade & Repair Service
 
-<br/>
+> 🇨🇳 **For Users in China**
 
-> 💡 **Upgrade Gen1 to Gen2 Battery, Double Your Battery Life!**
+Many friends in China purchased Ray-Ban Meta smart glasses through overseas shopping, but encountered some frustrations:
 
-Replace Ray-Ban Meta Gen1 battery with Gen2 high-capacity battery, 2x longer battery life.
+- 😤 **Gen1 battery life is too short** - Dies quickly, ruining the experience
+- 😰 **No official after-sales service in China** - Don't know where to get repairs
+- 💸 **Shipping back to US is expensive** - High cost, long wait, uncertain results
+
+**Now there's a solution!** A professional Ray-Ban Meta repair specialist can help you:
+
+✅ **Gen1 → Gen2 Battery Upgrade** - Double your battery life, no more battery anxiety
+✅ **Professional Repair Service** - Fix various hardware issues, bring your glasses back to life
+✅ **Local Support in China** - Never worry about repairs again
 
 <table>
   <tr>
-    <td><img src="./ad/电池更换计划.jpg" width="200"/></td>
-    <td><img src="./ad/更换后的图片.jpg" width="200"/></td>
+    <td><img src="./ad/电池更换计划.jpg" width="220"/></td>
+    <td><img src="./ad/更换后的图片.jpg" width="220"/></td>
   </tr>
 </table>
 
-| Item | Price |
-|------|-------|
-| Original Price | ~~¥299~~ |
-| **Turbo Referral Price** | **¥249** |
+| Service | Price |
+|---------|-------|
+| Battery Upgrade (Original) | ~~¥299~~ |
+| **Turbo Referral Price** | **¥249** (Save ¥50) |
 
-📱 **Contact**: WeChat ``, mention "Turbo Referral" for discount
-
-</details>
+📱 **Contact**: Add WeChat ``, mention "**Turbo Referral**" for discount
 
 ---
 
