@@ -120,9 +120,9 @@
 
 ### 📱 Android（推荐）
 
-| 版本 | 下载链接 | 大小 |
-|------|----------|------|
-| v1.0.0 | [**TurboMeta-v1.0.0.apk**](https://github.com/Turbo1123/turbometa-rayban-ai/releases/tag/v1.0.0) | 77 MB |
+[![Download APK](https://img.shields.io/github/v/release/Turbo1123/turbometa-rayban-ai?label=Download%20APK&logo=android&color=green)](https://github.com/Turbo1123/turbometa-rayban-ai/)
+
+👉 [**点击下载最新版 APK**](https://github.com/Turbo1123/turbometa-rayban-ai/)
 
 **Android 安装步骤：**
 1. 下载 APK 文件
@@ -135,9 +135,9 @@
 
 ### 🍎 iOS
 
-| 版本 | 下载链接 | 大小 |
-|------|----------|------|
-| v1.0.0 | [****](https://github.com/Turbo1123/turbometa-rayban-ai/releases/tag/v1.0.0) | 6.0 MB |
+[![](https://img.shields.io/github/v/release/Turbo1123/turbometa-rayban-ai?label=Source%20Code&logo=apple&color=black)](https://github.com/Turbo1123/turbometa-rayban-ai/)
+
+👉 [****](https://github.com/Turbo1123/turbometa-rayban-ai/)
 
 ### 安装工具推荐
 
