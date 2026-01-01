@@ -53,7 +53,8 @@ class OmniRealtimeService: NSObject {
     // Audio Playback Engine (separate engine for playback)
     private var playbackEngine: AVAudioEngine?
     private var playerNode: AVAudioPlayerNode?
-    private let audioFormat = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: 24000, channels: 1, interleaved: true)
+    // 使用 Float32 标准格式，兼容 iOS 18
+    private let playbackFormat = AVAudioFormat(standardFormatWithSampleRate: 24000, channels: 1)
 
     // Audio buffer management
     private var audioBuffer = Data()
@@ -101,7 +102,8 @@ class OmniRealtimeService: NSObject {
         playerNode = AVAudioPlayerNode()
 
         guard let playbackEngine = playbackEngine,
-              let playerNode = playerNode else {
+              let playerNode = playerNode,
+              let playbackFormat = playbackFormat else {
             print("❌ [Omni] 无法初始化播放引擎")
             return
         }
@@ -109,10 +111,11 @@ class OmniRealtimeService: NSObject {
         // Attach player node
         playbackEngine.attach(playerNode)
 
-        // Connect player node to output
-        playbackEngine.connect(playerNode, to: playbackEngine.mainMixerNode, format: nil)
+        // Connect player node to output with explicit format
+        playbackEngine.connect(playerNode, to: playbackEngine.mainMixerNode, format: playbackFormat)
+        playbackEngine.prepare()
 
-        print("✅ [Omni] 播放引擎初始化完成: PCM16 @ 24kHz")
+        print("✅ [Omni] 播放引擎初始化完成: Float32 @ 24kHz")
     }
 
     private func startPlaybackEngine() {
@@ -498,7 +501,7 @@ class OmniRealtimeService: NSObject {
 
     private func playAudio(_ audioData: Data) {
         guard let playerNode = playerNode,
-              let audioFormat = audioFormat else {
+              let playbackFormat = playbackFormat else {
             return
         }
 
@@ -513,8 +516,8 @@ class OmniRealtimeService: NSObject {
             }
         }
 
-        // Convert PCM16 Data to AVAudioPCMBuffer
-        guard let pcmBuffer = createPCMBuffer(from: audioData, format: audioFormat) else {
+        // Convert PCM16 Data to Float32 AVAudioPCMBuffer
+        guard let pcmBuffer = createPCMBuffer(from: audioData, format: playbackFormat) else {
             return
         }
 
@@ -523,21 +526,26 @@ class OmniRealtimeService: NSObject {
     }
 
     private func createPCMBuffer(from data: Data, format: AVAudioFormat) -> AVAudioPCMBuffer? {
-        // Calculate frame count (each frame is 2 bytes for PCM16 mono)
+        // 服务器发送的是 PCM16 格式，每帧 2 字节
         let frameCount = data.count / 2
+        guard frameCount > 0 else { return nil }
 
         guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(frameCount)),
-              let channelData = buffer.int16ChannelData else {
+              let channelData = buffer.floatChannelData else {
             return nil
         }
 
         buffer.frameLength = AVAudioFrameCount(frameCount)
 
-        // Copy PCM16 data directly to buffer
+        // 将 PCM16 转换为 Float32（兼容 iOS 18+）
         data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
             guard let baseAddress = bytes.baseAddress else { return }
             let int16Pointer = baseAddress.assumingMemoryBound(to: Int16.self)
-            channelData[0].update(from: int16Pointer, count: frameCount)
+            let floatData = channelData[0]
+            for i in 0..<frameCount {
+                // Int16 范围 -32768 到 32767，转换为 -1.0 到 1.0
+                floatData[i] = Float(int16Pointer[i]) / 32768.0
+            }
         }
 
         return buffer
