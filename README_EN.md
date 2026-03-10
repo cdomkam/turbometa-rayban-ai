@@ -126,7 +126,7 @@ Before using TurboMeta, you **MUST** enable developer mode in Meta AI App:
 
 ---
 
-### 🍎 iOS — Build from Source
+### 🍎 iOS — Build from Source (Build from Source)
 
 > ✅ Supports bilingual UI, OpenRouter, Gemini, RTMP streaming
 
