@@ -11,8 +11,6 @@
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9-purple.svg)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/Turbo1123/turbometa-rayban-ai)](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-☕-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/turbo1123)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-☕-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/turbo1123)
 
 [English](./README_EN.md) | [简体中文](./README.md)
@@ -29,7 +27,7 @@
 
 **Museum guide, accessibility assistant, reading mode, real-time translation - one pair of glasses, endless possibilities!**
 
-✅ **iOS v1.5.0** | 📱 **Android v1.5.0** [Download](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
+✅ **iOS v1.5.0** | 📱 **Android v1.5.0**
 
 ☕ **Enjoying this project?** [**Buy me a coffee**](https://buymeacoffee.com/turbo1123)  to support development!
 
@@ -108,9 +106,9 @@ Due to Meta DAT SDK limitations, the app cannot directly access the glasses came
 
 > 💡 If you find this project helpful, consider [**buying me a coffee**](https://buymeacoffee.com/turbo1123) ☕
 
-## 📥 Download
+## 📥 Get the Source Code
 
-> **No App Store / Google Play** - Install directly using methods below
+> ⚠️ **Disclaimer**: This is an open-source project for **educational and development purposes only**. We do **NOT** provide any pre-built binary downloads. You must build from source using Xcode or Android Studio.
 
 ### ⚠️ Important: Enable Developer Mode First!
 
@@ -128,30 +126,24 @@ Before using TurboMeta, you **MUST** enable developer mode in Meta AI App:
 
 ---
 
-### 📱 Android
-
-👉 [**Go to Downloads**](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
-
-**Android Installation:**
-1. Download APK file
-2. Enable "Install from unknown sources" in Settings
-3. Open APK to install
-4. Grant permissions (Bluetooth, Microphone)
-5. Configure API Key in Settings 👉 [See Configuration Guide](#api-key-config)
-
----
-
-### 🍎 iOS (Recommended)
+### 🍎 iOS — Build from Source
 
 > ✅ Supports bilingual UI, OpenRouter, Gemini, RTMP streaming
 
-👉 [**Go to Downloads**](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
+1. Clone this repository
+2. Open `CameraAccess.xcodeproj` with **Xcode 15.0+**
+3. Configure your own developer certificate and Bundle Identifier
+4. Connect your iPhone, click Run to build and install
+5. First launch requires trusting the developer certificate in iPhone **Settings → General → VPN & Device Management**
+6. Open TurboMeta and configure your Alibaba Cloud API Key in Settings 👉 [See Configuration Guide](#api-key-config)
 
-### Build from Source
+### 📱 Android — Build from Source
 
-1. Open the project in Xcode, connect your iPhone and run
-2. First launch requires trusting the developer certificate on iPhone
-3. Open TurboMeta and configure your Alibaba Cloud API Key in Settings 👉 [See Configuration Guide](#api-key-config)
+1. Clone this repository
+2. Open the `android/` directory with **Android Studio**
+3. Connect your Android phone, click Run to build and install
+4. Grant permissions (Bluetooth, Microphone)
+5. Configure API Key in Settings 👉 [See Configuration Guide](#api-key-config)
 
 ---
 
@@ -496,7 +488,7 @@ Customize AI response style in `OmniRealtimeService.swift`:
 1. Check if iPhone is in trusted devices list
 2. Verify developer certificate is valid
 3. Modify Bundle Identifier to avoid conflicts
-4. Free Apple Developer accounts require re-signing every 7 days
+4. Ensure you have a valid Apple Developer account
 
 ### Q5: Voice recognition inaccurate?
 

@@ -11,7 +11,6 @@
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9-purple.svg)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/Turbo1123/turbometa-rayban-ai)](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
 [![请我喝咖啡](https://img.shields.io/badge/请我喝咖啡-☕-yellow?style=flat-square)](#-请我喝杯咖啡)
 
 **🇺🇸 [English Version / README in English](./README_EN.md)** | 简体中文
@@ -32,7 +31,7 @@
 
 **博物馆讲解、盲人辅助、阅读朗读、实时翻译 - 一副眼镜，多种场景！**
 
-✅ **iOS v1.5.0** | 📱 **Android v1.5.0** [点击下载](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
+✅ **iOS v1.5.0** | 📱 **Android v1.5.0**
 
 ☕ **喜欢这个项目？** [**请我喝杯咖啡**](#-请我喝杯咖啡) 支持开发！
 
@@ -109,9 +108,9 @@
 
 > 💡 如果这个项目对你有帮助，欢迎[请我喝杯咖啡](#-请我喝杯咖啡) ☕
 
-## 📥 下载安装
+## 📥 获取源码
 
-> **** - 
+> ⚠️ **声明**：本项目为开源学习项目，仅提供源代码，**不提供任何预编译的 安装包**。用户需自行使用 Xcode 从源码编译，仅供个人学习和研究使用。
 
 ### ⚠️ 重要：请先开启开发者模式！
 
@@ -129,30 +128,24 @@
 
 ---
 
-### 📱 Android
-
-👉 [**前往下载页面**](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
-
-**Android 安装步骤：**
-1. 下载 APK 文件
-2. 在设置中开启"允许安装未知来源应用"
-3. 打开 APK 进行安装
-4. 授予权限（蓝牙、麦克风）
-5. 在设置中配置 API Key 👉 [查看配置教程](#api-key-config)
-
----
-
-### 🍎 iOS（推荐）
+### 🍎 iOS — 从源码编译
 
 > ✅ 支持中英文、OpenRouter、Gemini、RTMP 直播推流等功能
 
-👉 [**前往下载页面**](https://github.com/Turbo1123/turbometa-rayban-ai/releases)
+1. 克隆本仓库源码
+2. 使用 **Xcode 15.0+** 打开 `CameraAccess.xcodeproj`
+3. 配置你自己的开发者证书和 Bundle Identifier
+4. 连接 iPhone，点击 Run 编译运行
+5. 首次运行需要在 iPhone **设置 → 通用 → VPN与设备管理** 中信任开发者证书
+6. 打开 TurboMeta，在设置中配置你的阿里云 API Key 👉 [查看配置教程](#api-key-config)
 
-### 从源码编译安装
+### 📱 Android — 从源码编译
 
-1. 使用 Xcode 打开项目，连接 iPhone 运行
-2. 首次运行需要在 iPhone 设置中信任开发者证书
-3. 打开 TurboMeta，在设置中配置你的阿里云 API Key 👉 [查看配置教程](#api-key-config)
+1. 克隆本仓库源码
+2. 使用 **Android Studio** 打开 `android/` 目录
+3. 连接 Android 手机，点击 Run 编译运行
+4. 授予权限（蓝牙、麦克风）
+5. 在设置中配置 API Key 👉 [查看配置教程](#api-key-config)
 
 ---
 
@@ -192,7 +185,7 @@
 | 电池升级原价 | ~~¥299~~ |
 | **Turbo 推荐价** | **¥249**（省 ¥50）|
 
-📱 **联系方式**：添加微信 ``，备注「**Turbo推荐**」即可享受优惠价
+📱 **联系方式**：详情请见广告图片
 
 ---
 
@@ -213,7 +206,7 @@
 | ~~¥299~~ | 原价 |
 | **¥279** | Turbo 推荐价（省 ¥20）|
 
-👉 [**查看详情**](./ad/外挂电池.jpg) | 📱 微信咨询：``，备注「**Turbo推荐**」
+👉 [**查看详情**](./ad/外挂电池.jpg)
 
 ---
 
@@ -554,7 +547,7 @@ struct VisionAPIConfig {
 1. 检查 iPhone 是否在信任的设备列表中
 2. 确认开发者证书是否有效
 3. 修改 Bundle Identifier 避免冲突
-4. 使用免费的 Apple Developer 账号每 7 天需重新签名
+4. 确保使用有效的 Apple Developer 账号
 
 ### Q5: 语音识别不准确？
 
