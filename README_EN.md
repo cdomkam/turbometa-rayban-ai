@@ -202,14 +202,14 @@ This is the world's first **fully Chinese-enabled** RayBan Meta AI assistant, br
 ### iOS
 - **Platform**: iOS 17.0+
 - **Language**: Swift 5.0 + SwiftUI
-- **SDK**: Meta Wearables DAT SDK v0.3.0
+- **SDK**: Meta Wearables DAT SDK v0.4.0
 - **Architecture**: MVVM + Combine
 - **Audio**: AVAudioEngine + AVAudioPlayerNode
 
 ### Android
 - **Platform**: Android 8.0+ (API 26)
 - **Language**: Kotlin 1.9 + Jetpack Compose
-- **SDK**: Meta Wearables DAT SDK v0.3.0
+- **SDK**: Meta Wearables DAT SDK v0.4.0
 - **Architecture**: MVVM + StateFlow
 - **UI**: Material 3 Design
 
