@@ -1,7 +1,7 @@
 /*
  * Gemini Live WebSocket Service
  * Provides real-time audio chat with Google Gemini AI
- * Uses gemini-2.0-flash-exp model for real-time audio conversation
+ * Uses gemini-2.5-flash-native-audio-preview-12-2025 model for real-time audio conversation
  */
 
 import Foundation
@@ -54,10 +54,12 @@ class GeminiLiveService: NSObject {
     private var isRecording = false
     private var hasAudioBeenSent = false
     private var isSessionConfigured = false
+    private var reconnectAttempts = 0
+    private let maxReconnectAttempts = 3
 
     init(apiKey: String, model: String? = nil) {
         self.apiKey = apiKey
-        self.model = model ?? "gemini-2.0-flash-exp"
+        self.model = model ?? "gemini-2.5-flash-native-audio-preview-12-2025"
         super.init()
         setupAudioEngine()
     }
@@ -88,8 +90,9 @@ class GeminiLiveService: NSObject {
     private func configureAudioSession() {
         do {
             let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .allowBluetoothA2DP, .defaultToSpeaker])
+            try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker, .allowBluetooth, .allowBluetoothA2DP, .mixWithOthers])
             try audioSession.setActive(true, options: [.notifyOthersOnDeactivation])
+            print("✅ [Gemini] Audio session 已配置: route=\(audioSession.currentRoute.outputs.map { $0.portName })")
         } catch {
             print("⚠️ [Gemini] Audio session 配置失败: \(error)")
         }
@@ -125,7 +128,13 @@ class GeminiLiveService: NSObject {
         let baseURL = "wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent"
         let urlString = "\(baseURL)?key=\(apiKey)"
 
-        print("🔌 [Gemini] 准备连接 WebSocket")
+        print("🔌 [Gemini] 准备连接 WebSocket (apiKey length: \(apiKey.count))")
+
+        guard !apiKey.isEmpty else {
+            print("❌ [Gemini] API Key 为空")
+            onError?("Google API key is not set. Please configure it in Settings.")
+            return
+        }
 
         guard let url = URL(string: urlString) else {
             print("❌ [Gemini] 无效的 URL")
@@ -134,6 +143,9 @@ class GeminiLiveService: NSObject {
         }
 
         let configuration = URLSessionConfiguration.default
+        configuration.allowsExpensiveNetworkAccess = true
+        configuration.allowsConstrainedNetworkAccess = true
+        configuration.waitsForConnectivity = true
         urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue())
 
         webSocket = urlSession?.webSocketTask(with: url)
@@ -147,6 +159,8 @@ class GeminiLiveService: NSObject {
         print("🔌 [Gemini] 断开 WebSocket 连接")
         webSocket?.cancel(with: .goingAway, reason: nil)
         webSocket = nil
+        urlSession?.invalidateAndCancel()
+        urlSession = nil
         stopRecording()
         stopPlaybackEngine()
         isSessionConfigured = false
@@ -160,21 +174,21 @@ class GeminiLiveService: NSObject {
         // 根据当前 Live AI 模式获取系统提示词
         let instructions = LiveAIModeManager.staticSystemPrompt
 
-        // Gemini Live API setup message
+        // Gemini Live API setup message (camelCase format for 2.5+ models)
         let setupMessage: [String: Any] = [
             "setup": [
                 "model": "models/\(model)",
-                "generation_config": [
-                    "response_modalities": ["AUDIO"],
-                    "speech_config": [
-                        "voice_config": [
-                            "prebuilt_voice_config": [
-                                "voice_name": "Aoede"  // Gemini voice options: Aoede, Charon, Fenrir, Kore, Puck
+                "generationConfig": [
+                    "responseModalities": ["AUDIO"],
+                    "speechConfig": [
+                        "voiceConfig": [
+                            "prebuiltVoiceConfig": [
+                                "voiceName": "Aoede"
                             ]
                         ]
                     ]
                 ],
-                "system_instruction": [
+                "systemInstruction": [
                     "parts": [
                         ["text": instructions]
                     ]
@@ -331,14 +345,11 @@ class GeminiLiveService: NSObject {
     }
 
     private func sendRealtimeInput(audioData: String) {
-        // Gemini Live realtime input format
         let message: [String: Any] = [
-            "realtime_input": [
-                "media_chunks": [
-                    [
-                        "mime_type": "audio/pcm;rate=16000",
-                        "data": audioData
-                    ]
+            "realtimeInput": [
+                "audio": [
+                    "data": audioData,
+                    "mimeType": "audio/pcm;rate=16000"
                 ]
             ]
         ]
@@ -355,12 +366,10 @@ class GeminiLiveService: NSObject {
         print("📸 [Gemini] 发送图片: \(imageData.count) bytes")
 
         let message: [String: Any] = [
-            "realtime_input": [
-                "media_chunks": [
-                    [
-                        "mime_type": "image/jpeg",
-                        "data": base64Image
-                    ]
+            "realtimeInput": [
+                "video": [
+                    "data": base64Image,
+                    "mimeType": "image/jpeg"
                 ]
             ]
         ]
@@ -371,14 +380,26 @@ class GeminiLiveService: NSObject {
 
     private func receiveMessage() {
         webSocket?.receive { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let message):
-                self?.handleMessage(message)
-                self?.receiveMessage()
+                self.reconnectAttempts = 0
+                self.handleMessage(message)
+                self.receiveMessage()
 
             case .failure(let error):
                 print("❌ [Gemini] 接收消息失败: \(error.localizedDescription)")
-                self?.onError?("Receive error: \(error.localizedDescription)")
+                if self.reconnectAttempts < self.maxReconnectAttempts {
+                    self.reconnectAttempts += 1
+                    let delay = Double(self.reconnectAttempts) * 2.0
+                    print("🔄 [Gemini] 尝试重新连接 (\(self.reconnectAttempts)/\(self.maxReconnectAttempts)), \(delay)秒后重试...")
+                    DispatchQueue.global().asyncAfter(deadline: .now() + delay) { [weak self] in
+                        self?.disconnect()
+                        self?.connect()
+                    }
+                } else {
+                    self.onError?("Connection failed after \(self.maxReconnectAttempts) attempts: \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -581,6 +602,7 @@ class GeminiLiveService: NSObject {
 extension GeminiLiveService: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("✅ [Gemini] WebSocket 连接已建立")
+        reconnectAttempts = 0
         DispatchQueue.main.async {
             self.configureSession()
         }
@@ -589,5 +611,27 @@ extension GeminiLiveService: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
         let reasonString = reason.flatMap { String(data: $0, encoding: .utf8) } ?? "unknown"
         print("🔌 [Gemini] WebSocket 已断开, closeCode: \(closeCode.rawValue), reason: \(reasonString)")
+        DispatchQueue.main.async {
+            self.isSessionConfigured = false
+            self.onError?("WebSocket closed: \(reasonString)")
+        }
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            print("❌ [Gemini] 连接失败: \(error.localizedDescription)")
+            if let urlError = error as? URLError {
+                switch urlError.code {
+                case .notConnectedToInternet:
+                    print("📡 [Gemini] 无网络连接")
+                case .networkConnectionLost:
+                    print("📡 [Gemini] 网络连接丢失")
+                case .timedOut:
+                    print("⏱️ [Gemini] 连接超时")
+                default:
+                    print("📡 [Gemini] URLError code: \(urlError.code.rawValue)")
+                }
+            }
+        }
     }
 }

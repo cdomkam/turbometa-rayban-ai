@@ -18,9 +18,9 @@ class LiveTranslateService: NSObject {
     // Configuration
     private let apiKey: String
     private let model = "qwen3-livetranslate-flash-realtime"
-    // 根据用户设置的区域动态获取 WebSocket URL
+    // Always use Alibaba endpoint — this service uses the Qwen realtime protocol
     private var baseURL: String {
-        return APIProviderManager.staticLiveAIWebsocketURL
+        return APIProviderManager.staticAlibabaEndpoint.websocketURL
     }
 
     // Audio Engine (for recording)

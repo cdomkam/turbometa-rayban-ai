@@ -123,7 +123,7 @@ enum class LiveAIProvider(val id: String) {
     val defaultModel: String
         get() = when (this) {
             ALIBABA -> "qwen3-omni-flash-realtime"
-            GOOGLE -> "gemini-2.0-flash-exp"
+            GOOGLE -> "gemini-2.5-flash-native-audio-preview-12-2025"
         }
 
     val apiKeyHelpURL: String

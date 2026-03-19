@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit
 /**
  * Gemini Live WebSocket Service
  * Provides real-time audio chat with Google Gemini AI
- * Uses gemini-2.0-flash-exp model for real-time audio conversation
+ * Uses gemini-2.5-flash-native-audio-preview-12-2025 model for real-time audio conversation
  * 1:1 port from iOS GeminiLiveService.swift
  */
 class GeminiLiveService(
     private val apiKey: String,
-    private val model: String = "gemini-2.0-flash-exp",
+    private val model: String = "gemini-2.5-flash-native-audio-preview-12-2025",
     private val outputLanguage: String = "zh-CN",
     private val context: Context? = null
 ) {
@@ -192,17 +192,17 @@ class GeminiLiveService(
         val setupMessage = mapOf(
             "setup" to mapOf(
                 "model" to "models/$model",
-                "generation_config" to mapOf(
-                    "response_modalities" to listOf("AUDIO"),
-                    "speech_config" to mapOf(
-                        "voice_config" to mapOf(
-                            "prebuilt_voice_config" to mapOf(
-                                "voice_name" to "Aoede"  // Gemini voice options: Aoede, Charon, Fenrir, Kore, Puck
+                "generationConfig" to mapOf(
+                    "responseModalities" to listOf("AUDIO"),
+                    "speechConfig" to mapOf(
+                        "voiceConfig" to mapOf(
+                            "prebuiltVoiceConfig" to mapOf(
+                                "voiceName" to "Aoede"
                             )
                         )
                     )
                 ),
-                "system_instruction" to mapOf(
+                "systemInstruction" to mapOf(
                     "parts" to listOf(
                         mapOf("text" to instructions)
                     )
@@ -346,14 +346,11 @@ class GeminiLiveService(
 
         val base64Audio = Base64.encodeToString(audioData, Base64.NO_WRAP)
 
-        // Gemini Live realtime input format
         val message = mapOf(
-            "realtime_input" to mapOf(
-                "media_chunks" to listOf(
-                    mapOf(
-                        "mime_type" to "audio/pcm;rate=$INPUT_SAMPLE_RATE",
-                        "data" to base64Audio
-                    )
+            "realtimeInput" to mapOf(
+                "audio" to mapOf(
+                    "data" to base64Audio,
+                    "mimeType" to "audio/pcm;rate=$INPUT_SAMPLE_RATE"
                 )
             )
         )
@@ -380,12 +377,10 @@ class GeminiLiveService(
             Log.d(TAG, "Sending image: ${bytes.size} bytes")
 
             val message = mapOf(
-                "realtime_input" to mapOf(
-                    "media_chunks" to listOf(
-                        mapOf(
-                            "mime_type" to "image/jpeg",
-                            "data" to base64Image
-                        )
+                "realtimeInput" to mapOf(
+                    "video" to mapOf(
+                        "data" to base64Image,
+                        "mimeType" to "image/jpeg"
                     )
                 )
             )

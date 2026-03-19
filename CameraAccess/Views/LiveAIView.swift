@@ -93,26 +93,42 @@ struct LiveAIView: View {
             }
         }
         .onAppear {
-            // 只有设备连接时才启动功能
             guard streamViewModel.hasActiveDevice else {
                 print("⚠️ LiveAIView: 未连接RayBan Meta眼镜，跳过启动")
                 return
             }
 
-            // 启动视频流
             Task {
+                // 1. Start camera stream FIRST and wait for it
                 print("🎥 LiveAIView: 启动视频流")
                 await streamViewModel.handleStartStreaming()
-            }
 
-            // 自动连接并开始录音
-            viewModel.connect()
+                // Wait for stream to reach .streaming state (up to 5s)
+                var waitCount = 0
+                while streamViewModel.streamingStatus != .streaming && waitCount < 50 {
+                    try? await Task.sleep(nanoseconds: 100_000_000)
+                    waitCount += 1
+                }
 
-            // 更新视频帧
-            frameTimer?.invalidate()
-            frameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                if let frame = streamViewModel.currentVideoFrame {
-                    viewModel.updateVideoFrame(frame)
+                guard streamViewModel.streamingStatus == .streaming else {
+                    print("❌ LiveAIView: 视频流启动失败，仍然尝试连接AI")
+                    // Still connect Gemini for audio-only mode
+                    viewModel.connect()
+                    return
+                }
+                print("✅ LiveAIView: 视频流已就绪，连接AI服务")
+
+                // 2. THEN connect Gemini (audio session config won't disrupt the stream)
+                viewModel.connect()
+
+                // 3. Start frame forwarding timer
+                await MainActor.run {
+                    frameTimer?.invalidate()
+                    frameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                        if let frame = streamViewModel.currentVideoFrame {
+                            viewModel.updateVideoFrame(frame)
+                        }
+                    }
                 }
             }
         }

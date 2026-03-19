@@ -95,7 +95,8 @@ class LiveTranslateViewModel: ObservableObject {
     // MARK: - Connection
 
     func connect() {
-        let apiKey = APIProviderManager.staticLiveAIAPIKey
+        // Live Translate always uses Alibaba Qwen — use the Alibaba API key regardless of Live AI provider setting
+        let apiKey = APIKeyManager.shared.getAPIKey(for: .alibaba, endpoint: APIProviderManager.staticAlibabaEndpoint) ?? ""
         guard !apiKey.isEmpty else {
             errorMessage = "livetranslate.error.noApiKey".localized
             showError = true
