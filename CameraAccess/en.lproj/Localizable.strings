@@ -17,6 +17,32 @@
 "retry" = "Retry";
 "back" = "Back";
 
+// MARK: - Welcome Screen
+"welcome.subtitle" = "RayBan Meta Assistant";
+"welcome.feature.video.title" = "Live Video";
+"welcome.feature.video.desc" = "Record video directly from the glasses' perspective, capturing what you see and hear";
+"welcome.feature.ai.title" = "AI Chat";
+"welcome.feature.ai.desc" = "Real-time AI assistant, providing smart help anytime, anywhere";
+"welcome.feature.audio.title" = "Open Audio";
+"welcome.feature.audio.desc" = "Keep your ears open to the world around you while receiving notifications";
+"welcome.connect.hint" = "You will be redirected to the Meta AI app to confirm connection";
+"welcome.connect.connecting" = "Connecting...";
+"welcome.connect.button" = "Connect Ray-Ban Meta";
+"welcome.connect.success" = "Connected";
+"welcome.connect.entering" = "Entering TurboMeta...";
+
+// MARK: - Permissions
+"permissions.title" = "Permission Required";
+"permissions.subtitle" = "TurboMeta needs the following permissions to work properly";
+"permissions.microphone" = "Microphone";
+"permissions.microphone.desc" = "Voice conversation and recording";
+"permissions.photos" = "Photos";
+"permissions.photos.desc" = "Save photos taken with your glasses";
+"permissions.denied" = "Some permissions were not granted";
+"permissions.settings" = "Open Settings";
+"permissions.continue" = "Continue with limited features";
+"permissions.grant" = "Grant Permissions";
+
 // MARK: - Home Screen
 "home.title" = "Home";
 "home.liveai.title" = "Live AI";

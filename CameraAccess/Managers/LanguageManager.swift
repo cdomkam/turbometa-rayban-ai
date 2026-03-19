@@ -46,7 +46,7 @@ class LanguageManager: ObservableObject {
     nonisolated(unsafe) static var currentBundle: Bundle = .main
 
     private init() {
-        let savedLanguage = UserDefaults.standard.string(forKey: languageKey) ?? "system"
+        let savedLanguage = UserDefaults.standard.string(forKey: languageKey) ?? "en"
         self.currentLanguage = AppLanguage(rawValue: savedLanguage) ?? .system
         updateBundle()
     }

@@ -1,6 +1,5 @@
 /*
  * Permissions Request View
- * 应用启动时的权限请求界面
  */
 
 import SwiftUI
@@ -31,11 +30,11 @@ struct PermissionsRequestView: View {
 
                 // Title
                 VStack(spacing: AppSpacing.sm) {
-                    Text("需要您的授权")
+                    Text("permissions.title".localized)
                         .font(AppTypography.title)
                         .foregroundColor(AppColors.textPrimary)
 
-                    Text("TurboMeta 需要以下权限才能正常工作")
+                    Text("permissions.subtitle".localized)
                         .font(AppTypography.body)
                         .foregroundColor(AppColors.textSecondary)
                         .multilineTextAlignment(.center)
@@ -46,14 +45,14 @@ struct PermissionsRequestView: View {
                 VStack(spacing: AppSpacing.md) {
                     PermissionRow(
                         icon: "mic.fill",
-                        title: "麦克风",
-                        description: "语音对话和录音"
+                        title: "permissions.microphone".localized,
+                        description: "permissions.microphone.desc".localized
                     )
 
                     PermissionRow(
                         icon: "photo.fill",
-                        title: "相册",
-                        description: "保存眼镜拍摄的照片"
+                        title: "permissions.photos".localized,
+                        description: "permissions.photos.desc".localized
                     )
                 }
                 .padding(.horizontal, AppSpacing.xl)
@@ -68,7 +67,7 @@ struct PermissionsRequestView: View {
                             .scaleEffect(1.5)
                     } else if showSettings {
                         VStack(spacing: AppSpacing.sm) {
-                            Text("部分权限未授予")
+                            Text("permissions.denied".localized)
                                 .font(AppTypography.caption)
                                 .foregroundColor(.red)
 
@@ -77,7 +76,7 @@ struct PermissionsRequestView: View {
                             } label: {
                                 HStack {
                                     Image(systemName: "gear")
-                                    Text("前往设置")
+                                    Text("permissions.settings".localized)
                                         .font(AppTypography.headline)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -87,7 +86,7 @@ struct PermissionsRequestView: View {
                                 .cornerRadius(AppCornerRadius.lg)
                             }
 
-                            Button("继续使用（功能受限）") {
+                            Button("permissions.continue".localized) {
                                 onComplete(false)
                             }
                             .font(AppTypography.body)
@@ -99,7 +98,7 @@ struct PermissionsRequestView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                Text("授予权限")
+                                Text("permissions.grant".localized)
                                     .font(AppTypography.headline)
                             }
                             .frame(maxWidth: .infinity)

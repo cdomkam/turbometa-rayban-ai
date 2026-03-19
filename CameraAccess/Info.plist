@@ -42,20 +42,20 @@
 		<key>AppLinkURLScheme</key>
 		<string>turbometa://</string>
 		<key>ClientToken</key>
-		<string>$(CLIENT_TOKEN)</string>
+		<string>$(META_CLIENT_TOKEN)</string>
 		<key>MetaAppID</key>
-		<string>0</string>
+		<string>$(META_APP_ID)</string>
 		<key>TeamID</key>
 		<string>$(DEVELOPMENT_TEAM)</string>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Needed to connect to Meta AI Glasses</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>TurboMeta 需要访问麦克风以实现与智能眼镜的实时语音对话功能。</string>
+	<string>TurboMeta needs microphone access for real-time voice conversations with your smart glasses.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>TurboMeta 需要访问相册以保存从智能眼镜拍摄的照片。</string>
+	<string>TurboMeta needs photo library access to save photos taken with your smart glasses.</string>
 	<key>NSSiriUsageDescription</key>
-	<string>TurboMeta 需要 Siri 权限以支持语音快捷指令触发快速识图功能。</string>
+	<string>TurboMeta needs Siri access to support voice shortcuts for Quick Vision.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

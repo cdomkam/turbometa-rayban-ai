@@ -17,6 +17,32 @@
 "retry" = "重试";
 "back" = "返回";
 
+// MARK: - Welcome Screen
+"welcome.subtitle" = "RayBan Meta助手";
+"welcome.feature.video.title" = "实时视频";
+"welcome.feature.video.desc" = "从眼镜视角直接录制视频，捕捉你的所见所闻";
+"welcome.feature.ai.title" = "AI 对话";
+"welcome.feature.ai.desc" = "实时 AI 助手，随时随地为你提供智能帮助";
+"welcome.feature.audio.title" = "开放式音频";
+"welcome.feature.audio.desc" = "保持耳朵对周围世界的开放，同时接收通知";
+"welcome.connect.hint" = "将跳转到 Meta AI 应用确认连接";
+"welcome.connect.connecting" = "连接中...";
+"welcome.connect.button" = "连接 Ray-Ban Meta";
+"welcome.connect.success" = "连接成功";
+"welcome.connect.entering" = "正在进入 TurboMeta...";
+
+// MARK: - Permissions
+"permissions.title" = "需要您的授权";
+"permissions.subtitle" = "TurboMeta 需要以下权限才能正常工作";
+"permissions.microphone" = "麦克风";
+"permissions.microphone.desc" = "语音对话和录音";
+"permissions.photos" = "相册";
+"permissions.photos.desc" = "保存眼镜拍摄的照片";
+"permissions.denied" = "部分权限未授予";
+"permissions.settings" = "前往设置";
+"permissions.continue" = "继续使用（功能受限）";
+"permissions.grant" = "授予权限";
+
 // MARK: - Home Screen
 "home.title" = "首页";
 "home.liveai.title" = "Live AI";

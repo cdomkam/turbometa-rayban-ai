@@ -46,5 +46,8 @@ android/local.properties
 *.mobileprovision
 *.dSYM/
 
+# Secrets
+Secrets.xcconfig
+
 # Signing tutorial images
 /
